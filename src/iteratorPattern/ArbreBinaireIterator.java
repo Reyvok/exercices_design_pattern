@@ -33,19 +33,22 @@ public class ArbreBinaireIterator implements Iterator<ArbreBinaire> {
         if(arbreBinaire.getFilsGauche() != null && !arbreBinaire.getFilsGauche().isVisited()){
             arbreBinaire.setVisited(true);
             lifo.push(arbreBinaire);
-            return arbreBinaire.getFilsGauche();
+            arbreBinaire = arbreBinaire.getFilsGauche();
+            return arbreBinaire;
         }
         if(arbreBinaire.getFilsDroit() != null && !arbreBinaire.getFilsDroit().isVisited()){
             arbreBinaire.setVisited(true);
             lifo.push(arbreBinaire);
-            return arbreBinaire.getFilsDroit();
+            arbreBinaire = arbreBinaire.getFilsDroit();
+            return arbreBinaire;
         }
 
         while(!lifo.empty()) {
             arbreBinaire = lifo.pop();
             if(arbreBinaire.getFilsDroit() != null && !arbreBinaire.getFilsDroit().isVisited()){
                 lifo.push(arbreBinaire);
-                return arbreBinaire.getFilsDroit();
+                arbreBinaire = arbreBinaire.getFilsDroit();
+                return arbreBinaire;
             }
         }
         throw new NoSuchElementException();
